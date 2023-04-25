@@ -1,3 +1,4 @@
+-- 你这也太野了吧
 local hl2sdk_path = "D:/source/hl2sdk-csgo"
 local mms_path = "D:/source/metamod-source"
 
