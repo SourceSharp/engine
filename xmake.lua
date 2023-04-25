@@ -2,6 +2,8 @@ local hl2sdk_path = "D:/source/hl2sdk-csgo"
 local mms_path = "D:/source/metamod-source"
 
 target("sourcesharp")
+    set_languages("c99", "cxx20")
+
     set_kind("shared")
     add_files("src/*.cpp")
     add_includedirs("src")
