@@ -1,0 +1,5 @@
+/.xmake/
+/build/
+/cmake-build-debug/
+
+/.idea/
