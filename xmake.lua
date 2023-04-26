@@ -1,6 +1,13 @@
--- 你这也太野了吧
-local hl2sdk_path = "D:/source/hl2sdk-csgo"
-local mms_path = "D:/source/metamod-source"
+-- Define HL2SDK table first.
+local HL2SDK_TABLE = {
+    ["cs2"] = {env = "HL2SDK_CS2", code = 21, macro = "CS2"}
+}
+-- I think xmake should have a way to take out specific table, but passing in params.
+-- If you want to use xmake to gen cmake, then probably you should add CMakeLists.txt to gitignore.
+-- But probably we could xmake build directly?
+
+local hl2sdk_path = "D:/source/hl2sdk-csgo" -- need to some extra work to get hl2sdk and related stuffs
+local mms_path = os.getenv("METAMOD_SOURCE") -- NO HARDCODE PLS!
 
 target("sourcesharp")
     set_languages("c99", "cxx20")
