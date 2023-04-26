@@ -1,5 +1,13 @@
-local hl2sdk_path = "D:/source/hl2sdk-csgo"
-local mms_path = "D:/source/metamod-source"
+-- Define HL2SDK table first.
+local HL2SDK_TABLE = {
+    ["cs2"] = {env = "HL2SDK_CS2", code = 21, macro = "CS2"}
+}
+-- I think xmake should have a way to take out specific table, but passing in params.
+-- If you want to use xmake to gen cmake, then probably you should add CMakeLists.txt to gitignore.
+-- But probably we could xmake build directly?
+
+local hl2sdk_path = "D:/source/hl2sdk-csgo" -- need to some extra work to get hl2sdk and related stuffs
+local mms_path = os.getenv("METAMOD_SOURCE") -- NO HARDCODE PLS!
 
 target("sourcesharp")
     set_languages("c99", "cxx20")
@@ -9,6 +17,7 @@ target("sourcesharp")
     add_includedirs("src")
     add_includedirs("include")
 
+    -- better not hard-coding here, perhaps we could found a way to add it. 
     add_includedirs("D:/SourceSharp/runtime/Core/bin/x86/Release/net7.0/win-x86")
     add_linkdirs("D:/SourceSharp/runtime/Core/bin/x86/Release/net7.0/win-x86")
     add_links("SourceSharp.Runtime")
@@ -45,26 +54,38 @@ target("sourcesharp")
     -- Windows
     add_defines("WIN32", "_WINDOWS")
 
-    -- HL2SDK
-    add_includedirs(mms_path .. "/core", mms_path .. "/core/sourcehook")
-    add_includedirs(hl2sdk_path .. "/public")
-    add_includedirs(hl2sdk_path .. "/public/engine")
-    add_includedirs(hl2sdk_path .. "/public/mathlib")
-    add_includedirs(hl2sdk_path .. "/public/vstdlib")
-    add_includedirs(hl2sdk_path .. "/public/tier0")
-    add_includedirs(hl2sdk_path .. "/public/tier1")
-    add_includedirs(hl2sdk_path .. "/public/game/server")
-    add_includedirs(hl2sdk_path .. "/public/toolframework")
-    add_includedirs(hl2sdk_path .. "/game/shared")
-    add_includedirs(hl2sdk_path .. "/common")
+    -- Include all necessary directories.
+    add_includedirs(
+        path.join(mms_path, "core"),
+        path.join(mms_path, "core", "sourcehook")
+    )
+    -- metamod
+    add_includedirs(
+        path.join(mms_path, "core"),
+        path.join(mms_path, "core", "sourcehook")
+    )
+    -- hl2sdk
+    add_includedirs(
+        path.join(hl2sdk_path, "public"),
+        path.join(hl2sdk_path, "public", "engine"),
+        path.join(hl2sdk_path, "public", "mathlib"),
+        path.join(hl2sdk_path, "public", "vstdlib"),
+        path.join(hl2sdk_path, "public", "tier0"),
+        path.join(hl2sdk_path, "public", "tier1"),
+        path.join(hl2sdk_path, "public", "game", "server"),
+        path.join(hl2sdk_path, "game", "shared"),
+        path.join(hl2sdk_path, "common")
+    )
+    -- cs2 define is 21? iirc this is used for csgo
+    -- nvm, my advice is remove everything of old stuff
     add_defines("SOURCE_ENGINE=21")
 
-        -- MSVC
+    -- MSVC
     add_defines("COMPILER_MSVC", "COMPILER_MSVC32")
 
     add_defines("NETWORK_VARS_ENABLED")
 
-    add_linkdirs(hl2sdk_path .. "/lib/public")
+    add_linkdirs(path.join(hl2sdk_path, "lib", "public"))
     add_links('tier0', 'tier1', 'vstdlib', 'mathlib', 'interfaces')
 
     -- win need
