@@ -1,5 +1,5 @@
 "Metamod Plugin"
 {
-	"alias"		"sourcesharp"
-	"file"		"addons/sourcesharp/bin/sourcesharp"
+    "alias" "sourcesharp"
+    "file"  "addons/sourcesharp/bin/sourcesharp"
 }

@@ -1,28 +1,9 @@
 /**
- * vim: set ts=4 sw=4 tw=99 noet :
  * ======================================================
  * SourceSharp - Engine Layer.
  * Copyright (C) 2023-Present SourceSharp Dev Team.
  * All rights reserved.
  * ======================================================
- *
- * This software is provided 'as-is', without any express or implied warranty.
- * In no event will the authors be held liable for any damages arising from 
- * the use of this software.
- *
- * Permission is granted to anyone to use this software for any purpose, 
- * including commercial applications, and to alter it and redistribute it 
- * freely, subject to the following restrictions:
- *
- * 1. The origin of this software must not be misrepresented; you must not 
- * claim that you wrote the original software. If you use this software in a 
- * product, an acknowledgment in the product documentation would be 
- * appreciated but is not required.
- * 2. Altered source versions must be plainly marked as such, and must not be
- * misrepresented as being the original software.
- * 3. This notice may not be removed or altered from any source distribution.
- *
- * Version: $Id$
  */
 
 #ifndef SOURCESHARP_CORE_H
@@ -34,8 +15,19 @@
 #define SS_API extern "C" __attribute__ ((visibility("default")))
 #endif
 
+/* Console Command */
 SS_API void RegServerCommand(const char *command);
-
 SS_API void RegClientCommand(const char *command);
+
+/* Event */
+SS_API bool         Event_SetInt(const char* pKey, int value);
+SS_API int          Event_GetInt(void* pEvent, const char* pKey);
+SS_API bool         Event_SetBool(const char* pKey, bool value);
+SS_API bool         Event_GetBool(void* pEvent, const char* pKey);
+SS_API bool         Event_SetFloat(const char* pKey, float value);
+SS_API float        Event_GetFloat(void* pEvent, const char* pKey);
+SS_API bool         Event_SetString(const char* pKey, const char* value);
+SS_API const char*  Event_GetString(const char* pKey, float value);
+SS_API void         Event_SetBroadcast(void* pEvent, bool value);
 
 #endif //SOURCESHARP_CORE_H
