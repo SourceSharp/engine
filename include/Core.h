@@ -11,6 +11,7 @@
 
 #include "modules/_export.h"
 
+#include "modules/core.h"
 #include "modules/concommand.h"
 #include "modules/event.h"
 
