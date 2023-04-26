@@ -6,8 +6,8 @@ local HL2SDK_TABLE = {
 -- If you want to use xmake to gen cmake, then probably you should add CMakeLists.txt to gitignore.
 -- But probably we could xmake build directly?
 
-local hl2sdk_path = "D:/source/hl2sdk-csgo" -- need to some extra work to get hl2sdk and related stuffs
-local mms_path = os.getenv("METAMOD_SOURCE") -- NO HARDCODE PLS!
+local hl2sdk_path = path.join(os.getenv("HL2SDK"), "hl2sdk-csgo")
+local mms_path = os.getenv("MMSOURCE")
 
 target("sourcesharp")
     set_languages("c99", "cxx20")
@@ -17,7 +17,7 @@ target("sourcesharp")
     add_includedirs("src")
     add_includedirs("include")
 
-    -- better not hard-coding here, perhaps we could found a way to add it. 
+    -- better not hard-coding here, perhaps we could found a way to add it.
     add_includedirs("D:/SourceSharp/runtime/Core/bin/x86/Release/net7.0/win-x86")
     add_linkdirs("D:/SourceSharp/runtime/Core/bin/x86/Release/net7.0/win-x86")
     add_links("SourceSharp.Runtime")
