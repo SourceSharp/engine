@@ -11,6 +11,9 @@
 
 /.idea/
 
+# vscode cpptools output file
+# vs with cmake default output files
+/out/
 
 # User-specific files
 *.rsuser

@@ -18,24 +18,24 @@ class IGameEvent
 {
 public:
     bool SetInt(const char* pKey, int value);
-    int GetInt(const char* pKey);
+    int  GetInt(const char* pKey);
 
     bool SetBool(const char* pKey, bool value);
     bool GetBool(const char* pKey);
 
-    bool SetFloat(const char* pKey, float value);
+    bool  SetFloat(const char* pKey, float value);
     float GetFloat(const char* pKey);
 
-    bool SetString(const char* pKey, const char* value);
+    bool        SetString(const char* pKey, const char* value);
     const char* GetString(const char* pKey);
 
     void SetBroadcast(bool value);
 
     const char* GetName();
-    bool GetBroadcast();
+    bool        GetBroadcast();
 
 private:
     void* m_pEvent;
 };
 
-#endif //SOURCESHARP_EVENT_H
+#endif // SOURCESHARP_EVENT_H

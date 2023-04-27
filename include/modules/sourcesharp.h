@@ -20,5 +20,4 @@ SS_API int GetMaxClients();
 SS_API int GetMaxHumanPlayers();
 SS_API int GetEngineVersion();
 
-
-#endif //SOURCESHARP_SOURCESHARP_H
+#endif // SOURCESHARP_SOURCESHARP_H
