@@ -11,12 +11,11 @@
 
 #include "_export.h"
 
-/* Event */
-SS_API bool RegGameEventHook(const char* pName);
-
 class IGameEvent
 {
 public:
+    const char* GetName();
+
     bool SetInt(const char* pKey, int value);
     int  GetInt(const char* pKey);
 
@@ -29,13 +28,16 @@ public:
     bool        SetString(const char* pKey, const char* value);
     const char* GetString(const char* pKey);
 
-    void SetBroadcast(bool value);
-
-    const char* GetName();
     bool        GetBroadcast();
+    bool        SetBroadcast(bool value);
+
+    void Cancel();
 
 private:
     void* m_pEvent;
 };
+
+SS_API bool         RegGameEventHook(const char* pName);
+SS_API IGameEvent*  CreateGameEvent(const char* pName, bool bBroadcast);
 
 #endif // SOURCESHARP_EVENT_H

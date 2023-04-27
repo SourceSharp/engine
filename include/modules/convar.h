@@ -58,4 +58,6 @@ SS_API IConVar* CreateConVar(   const char* pName,
 
 SS_API IConVar* FindConVar(const char* pName);
 
+SS_API void RegisterConVarHook(const char* pName);
+
 #endif // SOURCESHARP_CONVAR_H
