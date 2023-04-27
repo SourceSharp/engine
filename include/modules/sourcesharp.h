@@ -20,4 +20,8 @@ SS_API int GetMaxClients();
 SS_API int GetMaxHumanPlayers();
 SS_API int GetEngineVersion();
 
+SS_API void ExecuteServerCommand(const char* pCommand);
+SS_API void InsertServerCommand(const char* pCommand);
+SS_API void ServerExecute();
+
 #endif // SOURCESHARP_SOURCESHARP_H
