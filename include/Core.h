@@ -11,8 +11,8 @@
 
 #include "modules/_export.h"
 
-#include "modules/core.h"
 #include "modules/concommand.h"
+#include "modules/core.h"
 #include "modules/event.h"
 
-#endif //SOURCESHARP_CORE_H
+#endif // SOURCESHARP_CORE_H

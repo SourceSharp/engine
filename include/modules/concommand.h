@@ -12,7 +12,7 @@
 #include "_export.h"
 
 /* Console Command */
-SS_API void RegServerCommand(const char *command);
-SS_API void RegClientCommand(const char *command);
+SS_API void RegServerCommand(const char* command);
+SS_API void RegClientCommand(const char* command);
 
-#endif //SOURCESHARP_CONCOMMAND_H
+#endif // SOURCESHARP_CONCOMMAND_H

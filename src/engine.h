@@ -9,28 +9,27 @@
 #ifndef SAMPLE_MM_CORE_H
 #define SAMPLE_MM_CORE_H
 
-#include <unordered_set>
-#include <string>
-
 #include "Core.h"
 
+#include <string>
+#include <unordered_set>
 
-class Core {
+class Core
+{
 public:
     void Load();
 
     void Unload();
 
 public:
-    void RegServerCommand(const char *command);
+    void RegServerCommand(const char* command);
 
-    void RegClientCommand(const char *command);
+    void RegClientCommand(const char* command);
 
 private:
-
 #if SOURCE_ENGINE >= SE_ORANGEBOX
 
-    void Hook_ClientCommand(edict_t *pEntity, const CCommand &args);
+    void Hook_ClientCommand(edict_t* pEntity, const CCommand& args);
 
 #else
     void Hook_ClientCommand(edict_t* pEntity);
@@ -43,5 +42,4 @@ private:
 
 extern Core g_Core;
 
-
-#endif //SAMPLE_MM_CORE_H
+#endif // SAMPLE_MM_CORE_H
