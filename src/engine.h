@@ -14,6 +14,9 @@
 #include <string>
 #include <unordered_set>
 
+struct edict_t;
+class CCommand;
+
 class Core
 {
 public:

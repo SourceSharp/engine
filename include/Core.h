@@ -14,7 +14,7 @@
 #include "modules/sourcesharp.h"
 
 #include "modules/concommand.h"
-#include "modules/convar.h"
-#include "modules/event.h"
+// #include "modules/convar.h"
+// #include "modules/event.h"
 
 #endif // SOURCESHARP_CORE_H

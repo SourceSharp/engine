@@ -6,11 +6,12 @@ local HL2SDK_TABLE = {
 -- If you want to use xmake to gen cmake, then probably you should add CMakeLists.txt to gitignore.
 -- But probably we could xmake build directly?
 
-local hl2sdk_path = path.join(os.getenv("HL2SDK"), "hl2sdk-csgo") -- further works required
+local hl2sdk_path = path.join(os.getenv("HL2SDK_CSGO")) -- further works required
 local mms_path = os.getenv("MMSOURCE") or os.getenv("METAMOD_SOURCE") or nil
 
 target("sourcesharp", 
     function()
+        set_arch("x86")
         set_languages("c99", "cxx20")
 
         set_kind("shared")
@@ -19,8 +20,11 @@ target("sourcesharp",
         add_includedirs("include")
 
         -- better not hard-coding here, perhaps we could found a way to add it.
-        add_includedirs("D:/SourceSharp/runtime/Core/bin/x86/Release/net7.0/win-x86")
-        add_linkdirs("D:/SourceSharp/runtime/Core/bin/x86/Release/net7.0/win-x86")
+        -- 先硬编码
+        local ss_dir = path.join(os.getenv("SOURCESHARP"), "runtime", "Core", "bin", "Release", "net7.0", "win-x86")
+        -- local ss_dir = "D:/workshop/SourceSharp/runtime/Core/bin/Release/net7.0/win-x86"
+        add_includedirs(ss_dir)
+        add_linkdirs(ss_dir)
         add_links("SourceSharp.Runtime")
 
         -- msvc
@@ -33,7 +37,7 @@ target("sourcesharp",
 
         add_defines("_CRT_SECURE_NO_DEPRECATE", "_CRT_SECURE_NO_WARNINGS", "_CRT_NONSTDC_NO_DEPRECATE", "_ITERATOR_DEBUG_LEVEL=0")
         add_cflags("/W3")
-        add_cxxflags("/EHsc", "/GR-", "/TP")
+        add_cxxflags("/EHsc", "/GR-", "/TP", "/wd4819", "/wd4828", "/wd5033")
         add_ldflags("/MACHINE:X86", "kernel32.lib", "user32.lib",
                 "gdi32.lib", "winspool.lib", "comdlg32.lib",
                 "advapi32.lib", "shell32.lib", "ole32.lib",
