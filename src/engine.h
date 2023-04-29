@@ -10,7 +10,6 @@
 #define SAMPLE_MM_CORE_H
 
 #include "Core.h"
-
 #include <string>
 #include <unordered_set>
 

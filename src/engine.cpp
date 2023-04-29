@@ -7,7 +7,6 @@
  */
 
 #include "engine.h"
-
 #include <SourceSharp.Runtime.h>
 #include <sourcesharp.h>
 #include <vector>

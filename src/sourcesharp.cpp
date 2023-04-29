@@ -8,9 +8,8 @@
 
 #include "sourcesharp.h"
 #include "SourceSharp.Runtime.h"
-#include <stdio.h>
-
 #include "engine.h"
+#include <stdio.h>
 
 SH_DECL_HOOK6(IServerGameDLL, LevelInit, SH_NOATTRIB, 0, bool, char const*, char const*, char const*, char const*, bool,
               bool);
@@ -107,6 +106,8 @@ bool SourceSharp::Load(PluginId id, ISmmAPI* ismm, char* error, size_t maxlen, b
 #endif
 
     g_Core.Load();
+
+    ismm->LogMsg(this, "Engine initiated. Load runtime");
 
     InitializeSourceSharp();
 
