@@ -109,8 +109,6 @@ bool SourceSharp::Load(PluginId id, ISmmAPI* ismm, char* error, size_t maxlen, b
 
     g_Core.Load();
 
-    ismm->LogMsg(this, "Engine initiated. Load runtime");
-
     InitializeSourceSharp();
 
     return true;
@@ -223,9 +221,9 @@ void SourceSharp::Hook_GameFrame(bool simulating)
 }
 
 bool SourceSharp::Hook_LevelInit(const char* pMapName,
-                                 char const* pMapEntities,
-                                 char const* pOldLevel,
-                                 char const* pLandmarkName,
+                                 const char* pMapEntities,
+                                 const char* pOldLevel,
+                                 const char* pLandmarkName,
                                  bool        loadGame,
                                  bool        background)
 {
