@@ -9,6 +9,8 @@
 #include "sourcesharp.h"
 #include "SourceSharp.Runtime.h"
 #include "engine.h"
+#include <igameevents.h>
+#include <iplayerinfo.h>
 #include <stdio.h>
 
 SH_DECL_HOOK6(IServerGameDLL, LevelInit, SH_NOATTRIB, 0, bool, char const*, char const*, char const*, char const*, bool,

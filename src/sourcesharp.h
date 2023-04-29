@@ -11,9 +11,9 @@
 
 #include "engine_wrappers.h"
 #include <ISmmPlugin.h>
-#include <igameevents.h>
-#include <iplayerinfo.h>
-#include <sh_vector.h>
+
+struct edict_t;
+class CCommand;
 
 #if defined WIN32 && !defined snprintf
 #    define snprintf _snprintf
