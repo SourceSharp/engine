@@ -7,7 +7,6 @@
  */
 
 #include "engine.h"
-
 #include <SourceSharp.Runtime.h>
 #include <sourcesharp.h>
 #include <vector>
@@ -52,7 +51,7 @@ void Core::Hook_ClientCommand(edict_t* pEntity)
     }
 
     const char* cmd = args.Arg(0);
-    if (m_ClientCommands.contains(cmd))
+    if (m_ClientCommands.find(cmd) != m_ClientCommands.end()) // not test
     {
         ClientConsoleCommand(args.ArgS(), args.ArgV(), args.ArgC(), 3);
         RETURN_META(MRES_SUPERCEDE);

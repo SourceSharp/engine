@@ -10,9 +10,11 @@
 #define SAMPLE_MM_CORE_H
 
 #include "Core.h"
-
 #include <string>
 #include <unordered_set>
+
+struct edict_t;
+class CCommand;
 
 class Core
 {

@@ -8,9 +8,10 @@
 
 #include "sourcesharp.h"
 #include "SourceSharp.Runtime.h"
-#include <stdio.h>
-
 #include "engine.h"
+#include <igameevents.h>
+#include <iplayerinfo.h>
+#include <stdio.h>
 
 SH_DECL_HOOK6(IServerGameDLL, LevelInit, SH_NOATTRIB, 0, bool, char const*, char const*, char const*, char const*, bool,
               bool);
@@ -225,9 +226,9 @@ void SourceSharp::Hook_GameFrame(bool simulating)
 }
 
 bool SourceSharp::Hook_LevelInit(const char* pMapName,
-                                 char const* pMapEntities,
-                                 char const* pOldLevel,
-                                 char const* pLandmarkName,
+                                 const char* pMapEntities,
+                                 const char* pOldLevel,
+                                 const char* pLandmarkName,
                                  bool        loadGame,
                                  bool        background)
 {
