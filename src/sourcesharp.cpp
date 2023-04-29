@@ -9,9 +9,18 @@
 #include "sourcesharp.h"
 #include "SourceSharp.Runtime.h"
 #include "engine.h"
-#include <igameevents.h>
-#include <iplayerinfo.h>
 #include <stdio.h>
+
+SourceSharp             g_SourceSharp;
+IServerGameDLL*         server            = nullptr;
+IServerGameClients*     gameclients       = nullptr;
+IVEngineServer*         engine            = nullptr;
+IServerPluginHelpers*   helpers           = nullptr;
+IGameEventManager2*     gameevents        = nullptr;
+IServerPluginCallbacks* vsp_callbacks     = nullptr;
+IPlayerInfoManager*     playerinfomanager = nullptr;
+ICvar*                  icvar             = nullptr;
+CGlobalVars*            gpGlobals         = nullptr;
 
 SH_DECL_HOOK6(IServerGameDLL, LevelInit, SH_NOATTRIB, 0, bool, char const*, char const*, char const*, char const*, bool,
               bool);
@@ -36,16 +45,6 @@ SH_DECL_HOOK5(IServerGameClients, ClientConnect, SH_NOATTRIB, 0, bool, edict_t*,
 
 SH_DECL_HOOK2(IGameEventManager2, FireEvent, SH_NOATTRIB, 0, bool, IGameEvent*, bool);
 
-SourceSharp             g_SourceSharp;
-IServerGameDLL*         server            = NULL;
-IServerGameClients*     gameclients       = NULL;
-IVEngineServer*         engine            = NULL;
-IServerPluginHelpers*   helpers           = NULL;
-IGameEventManager2*     gameevents        = NULL;
-IServerPluginCallbacks* vsp_callbacks     = NULL;
-IPlayerInfoManager*     playerinfomanager = NULL;
-ICvar*                  icvar             = NULL;
-CGlobalVars*            gpGlobals         = NULL;
 
 /**
  * Something like this is needed to register cvars/CON_COMMANDs.
@@ -72,10 +71,9 @@ bool SourceSharp::Load(PluginId id, ISmmAPI* ismm, char* error, size_t maxlen, b
     GET_V_IFACE_CURRENT(GetEngineFactory, gameevents, IGameEventManager2, INTERFACEVERSION_GAMEEVENTSMANAGER2);
     GET_V_IFACE_CURRENT(GetEngineFactory, helpers, IServerPluginHelpers, INTERFACEVERSION_ISERVERPLUGINHELPERS);
     GET_V_IFACE_CURRENT(GetEngineFactory, icvar, ICvar, CVAR_INTERFACE_VERSION);
-    GET_V_IFACE_ANY(GetServerFactory, server, IServerGameDLL, INTERFACEVERSION_SERVERGAMEDLL);
-    GET_V_IFACE_ANY(GetServerFactory, gameclients, IServerGameClients, INTERFACEVERSION_SERVERGAMECLIENTS);
-    GET_V_IFACE_ANY(GetServerFactory, playerinfomanager, IPlayerInfoManager, INTERFACEVERSION_PLAYERINFOMANAGER);
-
+    GET_V_IFACE_CURRENT(GetServerFactory, server, IServerGameDLL, INTERFACEVERSION_SERVERGAMEDLL);
+    GET_V_IFACE_CURRENT(GetServerFactory, gameclients, IServerGameClients, INTERFACEVERSION_SERVERGAMECLIENTS);
+    GET_V_IFACE_CURRENT(GetServerFactory, playerinfomanager, IPlayerInfoManager, INTERFACEVERSION_PLAYERINFOMANAGER);
     gpGlobals = ismm->GetCGlobals();
 
     /* Load the VSP listener.  This is usually needed for IServerPluginHelpers. */

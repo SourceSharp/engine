@@ -11,6 +11,8 @@
 #include <sourcesharp.h>
 #include <vector>
 
+Core g_Core;
+
 #if SOURCE_ENGINE >= SE_ORANGEBOX
 
 SH_DECL_HOOK2_void(IServerGameClients, ClientCommand, SH_NOATTRIB, 0, edict_t*,
@@ -60,25 +62,27 @@ void Core::Hook_ClientCommand(edict_t* pEntity)
 
 void Core::RegServerCommand(const char* command)
 {
+    // TODO new ConCommand
     m_ServerCommands.emplace(command);
 }
 
 void Core::RegClientCommand(const char* command)
 {
+    // TODO new ConCommand
     m_ClientCommands.emplace(command);
 }
 
-Core g_Core;
+////////////////////////////////////////////////////////////////////
 
-void RegServerCommand(const char* command)
-{
-    g_Core.RegServerCommand(command);
-}
+CORE_INVOKE_FUNC_p1_void(LogError, const char*, pMessage);
+CORE_INVOKE_FUNC_p1_void(LogMessage, const char*, pMessage);
+CORE_INVOKE_FUNC_p0(GetGamePath, const char*);
+CORE_INVOKE_FUNC_p0(GetMaxClients, int);
+CORE_INVOKE_FUNC_p0(GetMaxHumanPlayers, int);
+CORE_INVOKE_FUNC_p0(GetEngineVersion, int);
 
-void RegClientCommand(const char* command)
-{
-    g_Core.RegClientCommand(command);
-}
+CORE_INVOKE_FUNC_p1_void(RegServerCommand, const char*, command);
+CORE_INVOKE_FUNC_p1_void(RegClientCommand, const char*, command);
 
 // ICore *GetInterfaceCore() {
 //     return (ICore * ) & g_Core;

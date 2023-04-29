@@ -12,6 +12,9 @@
 #include "engine_wrappers.h"
 #include <ISmmPlugin.h>
 
+#include <igameevents.h>
+#include <iplayerinfo.h>
+
 struct edict_t;
 class CCommand;
 
@@ -64,7 +67,19 @@ public:
     const char* GetLogTag();
 };
 
-extern SourceSharp g_SourceSharp;
+// TODO
+// https://github.com/alliedmodders/sourcemod/blob/97f2fc9d7fa49d334c6b70bb8b0d779b11a74ee5/core/sourcemm_api.cpp#L46
+
+extern SourceSharp  g_SourceSharp;
+extern IServerGameDLL*         server;
+extern IServerGameClients*     gameclients;
+extern IVEngineServer*         engine;
+extern IServerPluginHelpers*   helpers;
+extern IGameEventManager2*     gameevents;
+extern IServerPluginCallbacks* vsp_callbacks;
+extern IPlayerInfoManager*     playerinfomanager;
+extern ICvar*                  icvar;
+extern CGlobalVars*            gpGlobals;
 
 PLUGIN_GLOBALVARS();
 
