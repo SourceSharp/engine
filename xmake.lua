@@ -124,11 +124,13 @@ target("sourcesharp",
 
                 local sdk_path = ""
                 if is_plat("windows") then
-                    sdk_path = this_sdk.env[1] or this_sdk.env[2]
+                    -- env var is nil will throw error immediately
+                    -- so we dont need to care about it.
+                    sdk_path = os.getenv(this_sdk.env[1]) or os.getenv(this_sdk.env[2])
                 else
-                    sdk_path = this_sdk.env[1]
+                    sdk_path = os.getenv(this_sdk.env[1])
                 end
-                sdk_path = path.join(os.getenv(sdk_path))
+                sdk_path = path.join(sdk_path)
                 -- cuz valve's game always have tier0, and tier0 can be found at `public/tier0`
                 -- we can simply check whether this folder exists to know whether we are in root sdk folder.
                 local ConfigureEngineIncludes = function(sdk_path)
