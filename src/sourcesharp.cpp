@@ -66,13 +66,6 @@ PLUGIN_EXPOSE(SourceSharp, g_SourceSharp);
 
 bool SourceSharp::Load(PluginId id, ISmmAPI* ismm, char* error, size_t maxlen, bool late)
 {
-    const auto loadResult = InitializeSourceSharp();
-    if (loadResult != 0)
-    {
-        MM_Format(error, maxlen, "Failed to initialize SourceSharp, code: %d", loadResult);
-        return false;
-    }
-
     PLUGIN_SAVEVARS();
 
     GET_V_IFACE_CURRENT(GetEngineFactory, engine, IVEngineServer, INTERFACEVERSION_VENGINESERVER);
@@ -115,6 +108,12 @@ bool SourceSharp::Load(PluginId id, ISmmAPI* ismm, char* error, size_t maxlen, b
 #endif
 
     g_Core.Load();
+
+    const auto loadResult = InitializeSourceSharp();
+    if (loadResult != 0)
+    {
+        Error(error, maxlen, "Failed to initialize SourceSharp, code: %d", loadResult);
+    }
 
     return true;
 }
