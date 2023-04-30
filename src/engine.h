@@ -16,9 +16,23 @@
 #include <unordered_set>
 #include <ctime>
 
+#include <igameevents.h>
+#include <iplayerinfo.h>
+#include <iconvar.h>
 
 struct edict_t;
 class CCommand;
+
+extern IServerGameDLL*         server;
+extern IServerGameClients*     gameclients;
+extern IVEngineServer*         engine;
+extern IServerPluginHelpers*   helpers;
+extern IGameEventManager2*     gameevents;
+extern IServerPluginCallbacks* vsp_callbacks;
+extern IPlayerInfoManager*     playerinfomanager;
+extern ICvar*                  icvar;
+extern CGlobalVars*            gpGlobals;
+
 
 class Core
 {
@@ -73,7 +87,7 @@ public:
     void InsertServerCommand(const char* pCommand) const { engine->InsertServerCommand(pCommand); }
     void ServerExecute() const { engine->ServerExecute(); }
 
-// Command Listener
+// ConCommand
 public:
     void RegServerCommand(const char* command);
     void RegClientCommand(const char* command);

@@ -11,7 +11,7 @@
 
 #include "_export.h"
 
-class IGameEvent
+class SSGameEvent
 {
 public:
     const char* GetName();
@@ -34,10 +34,11 @@ public:
     void Cancel();
 
 private:
-    void* m_pEvent;
+    class IGameEvent;
+    IGameEvent* m_pEvent;
 };
 
-SS_API bool         RegGameEventHook(const char* pName);
-SS_API IGameEvent*  CreateGameEvent(const char* pName, bool bBroadcast);
+SS_API bool            RegGameEventHook(const char* pName);
+SS_API SSGameEvent*    CreateGameEvent(const char* pName, bool bBroadcast);
 
 #endif // SOURCESHARP_EVENT_H

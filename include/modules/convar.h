@@ -11,7 +11,7 @@
 
 #include "_export.h"
 
-class IConVar
+class SSConVar
 {
 public:
     const char* GetName();
@@ -44,10 +44,11 @@ public:
     bool ReplicateToPlayers(const int pPlayers[], int nPlayers);
 
 private:
-    void* m_pConVar;
+    class IConVar;
+    IConVar* m_pConVar;
 };
 
-SS_API IConVar* CreateConVar(   const char* pName, 
+SS_API SSConVar* CreateConVar(  const char* pName,
                                 const char* pDefValue,
                                 const char* pDescription,
                                 const int nFlags,
@@ -56,7 +57,7 @@ SS_API IConVar* CreateConVar(   const char* pName,
                                 const bool bHasMax,
                                 const float flMax);
 
-SS_API IConVar* FindConVar(const char* pName);
+SS_API SSConVar* FindConVar(const char* pName);
 
 SS_API void RegisterConVarHook(const char* pName);
 
