@@ -82,6 +82,8 @@ target("sourcesharp",
                         raise("Only accept MSVC!")
                     end
 
+                    target:add("includedirs", "xmake/msvc")
+
                     target:add("defines",
                         "WIN32", "_WINDOWS",
                         "_CRT_SECURE_NO_DEPRECATE",
@@ -141,6 +143,14 @@ target("sourcesharp",
                     end
                     ConfigureEngineIncludes(sdk_path)
                 end
+
+                -- better not hard-coding here, perhaps we could found a way to add it.
+                -- 先硬编码
+                local ss_dir = path.join(os.getenv("SOURCESHARP"), "runtime", ".deploy")
+                utils.cprint("Runtime Path: ${bright green}" .. ss_dir .. "${clear}")
+                target:add("includedirs", ss_dir)
+                target:add("linkdirs", ss_dir)
+                target:add("links", "SourceSharp.Runtime")
             end
         )
 
@@ -148,14 +158,6 @@ target("sourcesharp",
         add_files("src/*.cpp")
         add_includedirs("src")
         add_includedirs("include")
-
-        -- better not hard-coding here, perhaps we could found a way to add it.
-        -- 先硬编码
-        local ss_dir = path.join(os.getenv("SOURCESHARP"), "runtime", ".deploy")
-        print("Runtime Path: " .. ss_dir)
-        add_includedirs(ss_dir)
-        add_linkdirs(ss_dir)
-        add_links("SourceSharp.Runtime")
 
     end
 )
