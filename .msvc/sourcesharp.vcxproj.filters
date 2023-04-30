@@ -18,6 +18,12 @@
     <Filter Include="Common">
       <UniqueIdentifier>{eda33694-c47b-4e21-b29e-5343ade1c83f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Include">
+      <UniqueIdentifier>{d42eb442-f93d-48a8-be13-7391313ad730}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include\Module">
+      <UniqueIdentifier>{152d5e03-eb21-44e0-a6ea-2cca417a47af}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\sourcesharp.h">
@@ -28,6 +34,24 @@
     </ClInclude>
     <ClInclude Include="..\src\engine_wrappers.h">
       <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Core.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\modules\_export.h">
+      <Filter>Include\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\modules\concommand.h">
+      <Filter>Include\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\modules\convar.h">
+      <Filter>Include\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\modules\event.h">
+      <Filter>Include\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\modules\sourcesharp.h">
+      <Filter>Include\Module</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

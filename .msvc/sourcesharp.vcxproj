@@ -273,6 +273,12 @@
     <ClCompile Include="..\src\sourcesharp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\Core.h" />
+    <ClInclude Include="..\include\modules\concommand.h" />
+    <ClInclude Include="..\include\modules\convar.h" />
+    <ClInclude Include="..\include\modules\event.h" />
+    <ClInclude Include="..\include\modules\sourcesharp.h" />
+    <ClInclude Include="..\include\modules\_export.h" />
     <ClInclude Include="..\src\engine.h" />
     <ClInclude Include="..\src\engine_wrappers.h" />
     <ClInclude Include="..\src\sourcesharp.h" />
