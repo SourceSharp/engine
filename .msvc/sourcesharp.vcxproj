@@ -106,10 +106,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;SOURCE_ENGINE=21;NETWORK_VARS_ENABLED;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_ITERATOR_DEBUG_LEVEL=0;COMPILER_MSVC;COMPILER_MSVC32;DEBUG;CMAKE_INTDIR=\"Debug\";sourcesharp_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>%(sourcesharp)\engine\src;%(sourcesharp)\engine\include;%(sourcesharp)\runtime\.deploy;%(metamod)\core;%(metamod)\core\sourcehook;%(hl2sdk)\hl2sdk-csgo\public;%(hl2sdk)\hl2sdk-csgo\public\engine;%(hl2sdk)\hl2sdk-csgo\public\mathlib;%(hl2sdk)\hl2sdk-csgo\public\vstdlib;%(hl2sdk)\hl2sdk-csgo\public\tier0;%(hl2sdk)\hl2sdk-csgo\public\tier1;%(hl2sdk)\hl2sdk-csgo\public\game\server;%(hl2sdk)\hl2sdk-csgo\game\shared;%(hl2sdk)\hl2sdk-csgo\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(sourcesharp)\engine\src;$(sourcesharp)\engine\include;$(sourcesharp)\runtime\.deploy;$(metamod)\core;$(metamod)\core\sourcehook;$(hl2sdk)\hl2sdk-csgo\public;$(hl2sdk)\hl2sdk-csgo\public\engine;$(hl2sdk)\hl2sdk-csgo\public\mathlib;$(hl2sdk)\hl2sdk-csgo\public\vstdlib;$(hl2sdk)\hl2sdk-csgo\public\tier0;$(hl2sdk)\hl2sdk-csgo\public\tier1;$(hl2sdk)\hl2sdk-csgo\public\game\server;$(hl2sdk)\hl2sdk-csgo\game\shared;$(hl2sdk)\hl2sdk-csgo\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>%(sourcesharp)\engine\src;%(sourcesharp)\engine\include;%(sourcesharp)\runtime\.deploy;%(metamod)\core;%(metamod)\core\sourcehook;%(hl2sdk)\hl2sdk-csgo\public;%(hl2sdk)\hl2sdk-csgo\public\engine;%(hl2sdk)\hl2sdk-csgo\public\mathlib;%(hl2sdk)\hl2sdk-csgo\public\vstdlib;%(hl2sdk)\hl2sdk-csgo\public\tier0;%(hl2sdk)\hl2sdk-csgo\public\tier1;%(hl2sdk)\hl2sdk-csgo\public\game\server;%(hl2sdk)\hl2sdk-csgo\game\shared;%(hl2sdk)\hl2sdk-csgo\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(sourcesharp)\engine\src;$(sourcesharp)\engine\include;$(sourcesharp)\runtime\.deploy;$(metamod)\core;$(metamod)\core\sourcehook;$(hl2sdk)\hl2sdk-csgo\public;$(hl2sdk)\hl2sdk-csgo\public\engine;$(hl2sdk)\hl2sdk-csgo\public\mathlib;$(hl2sdk)\hl2sdk-csgo\public\vstdlib;$(hl2sdk)\hl2sdk-csgo\public\tier0;$(hl2sdk)\hl2sdk-csgo\public\tier1;$(hl2sdk)\hl2sdk-csgo\public\game\server;$(hl2sdk)\hl2sdk-csgo\game\shared;$(hl2sdk)\hl2sdk-csgo\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -133,7 +133,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>%(sourcesharp)\engine\src;%(sourcesharp)\engine\include;%(sourcesharp)\runtime\.deploy;%(metamod)\core;%(metamod)\core\sourcehook;%(hl2sdk)\hl2sdk-csgo\public;%(hl2sdk)\hl2sdk-csgo\public\engine;%(hl2sdk)\hl2sdk-csgo\public\mathlib;%(hl2sdk)\hl2sdk-csgo\public\vstdlib;%(hl2sdk)\hl2sdk-csgo\public\tier0;%(hl2sdk)\hl2sdk-csgo\public\tier1;%(hl2sdk)\hl2sdk-csgo\public\game\server;%(hl2sdk)\hl2sdk-csgo\game\shared;%(hl2sdk)\hl2sdk-csgo\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(sourcesharp)\engine\src;$(sourcesharp)\engine\include;$(sourcesharp)\runtime\.deploy;$(metamod)\core;$(metamod)\core\sourcehook;$(hl2sdk)\hl2sdk-csgo\public;$(hl2sdk)\hl2sdk-csgo\public\engine;$(hl2sdk)\hl2sdk-csgo\public\mathlib;$(hl2sdk)\hl2sdk-csgo\public\vstdlib;$(hl2sdk)\hl2sdk-csgo\public\tier0;$(hl2sdk)\hl2sdk-csgo\public\tier1;$(hl2sdk)\hl2sdk-csgo\public\game\server;$(hl2sdk)\hl2sdk-csgo\game\shared;$(hl2sdk)\hl2sdk-csgo\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) -fcxx-exceptions</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DisableSpecificWarnings>4819;4828;5033;4005</DisableSpecificWarnings>
@@ -152,10 +152,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;SOURCE_ENGINE=21;NETWORK_VARS_ENABLED;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_ITERATOR_DEBUG_LEVEL=0;COMPILER_MSVC;COMPILER_MSVC32;DEBUG;_DEBUG;CMAKE_INTDIR=\"Release\";sourcesharp_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>%(sourcesharp)\engine\src;%(sourcesharp)\engine\include;%(sourcesharp)\runtime\.deploy;%(metamod)\core;%(metamod)\core\sourcehook;%(hl2sdk)\hl2sdk-csgo\public;%(hl2sdk)\hl2sdk-csgo\public\engine;%(hl2sdk)\hl2sdk-csgo\public\mathlib;%(hl2sdk)\hl2sdk-csgo\public\vstdlib;%(hl2sdk)\hl2sdk-csgo\public\tier0;%(hl2sdk)\hl2sdk-csgo\public\tier1;%(hl2sdk)\hl2sdk-csgo\public\game\server;%(hl2sdk)\hl2sdk-csgo\game\shared;%(hl2sdk)\hl2sdk-csgo\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(sourcesharp)\engine\src;$(sourcesharp)\engine\include;$(sourcesharp)\runtime\.deploy;$(metamod)\core;$(metamod)\core\sourcehook;$(hl2sdk)\hl2sdk-csgo\public;$(hl2sdk)\hl2sdk-csgo\public\engine;$(hl2sdk)\hl2sdk-csgo\public\mathlib;$(hl2sdk)\hl2sdk-csgo\public\vstdlib;$(hl2sdk)\hl2sdk-csgo\public\tier0;$(hl2sdk)\hl2sdk-csgo\public\tier1;$(hl2sdk)\hl2sdk-csgo\public\game\server;$(hl2sdk)\hl2sdk-csgo\game\shared;$(hl2sdk)\hl2sdk-csgo\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>%(sourcesharp)\engine\src;%(sourcesharp)\engine\include;%(sourcesharp)\runtime\.deploy;%(metamod)\core;%(metamod)\core\sourcehook;%(hl2sdk)\hl2sdk-csgo\public;%(hl2sdk)\hl2sdk-csgo\public\engine;%(hl2sdk)\hl2sdk-csgo\public\mathlib;%(hl2sdk)\hl2sdk-csgo\public\vstdlib;%(hl2sdk)\hl2sdk-csgo\public\tier0;%(hl2sdk)\hl2sdk-csgo\public\tier1;%(hl2sdk)\hl2sdk-csgo\public\game\server;%(hl2sdk)\hl2sdk-csgo\game\shared;%(hl2sdk)\hl2sdk-csgo\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(sourcesharp)\engine\src;$(sourcesharp)\engine\include;$(sourcesharp)\runtime\.deploy;$(metamod)\core;$(metamod)\core\sourcehook;$(hl2sdk)\hl2sdk-csgo\public;$(hl2sdk)\hl2sdk-csgo\public\engine;$(hl2sdk)\hl2sdk-csgo\public\mathlib;$(hl2sdk)\hl2sdk-csgo\public\vstdlib;$(hl2sdk)\hl2sdk-csgo\public\tier0;$(hl2sdk)\hl2sdk-csgo\public\tier1;$(hl2sdk)\hl2sdk-csgo\public\game\server;$(hl2sdk)\hl2sdk-csgo\game\shared;$(hl2sdk)\hl2sdk-csgo\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -179,7 +179,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>%(sourcesharp)\engine\src;%(sourcesharp)\engine\include;%(sourcesharp)\runtime\.deploy;%(metamod)\core;%(metamod)\core\sourcehook;%(hl2sdk)\hl2sdk-csgo\public;%(hl2sdk)\hl2sdk-csgo\public\engine;%(hl2sdk)\hl2sdk-csgo\public\mathlib;%(hl2sdk)\hl2sdk-csgo\public\vstdlib;%(hl2sdk)\hl2sdk-csgo\public\tier0;%(hl2sdk)\hl2sdk-csgo\public\tier1;%(hl2sdk)\hl2sdk-csgo\public\game\server;%(hl2sdk)\hl2sdk-csgo\game\shared;%(hl2sdk)\hl2sdk-csgo\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(sourcesharp)\engine\src;$(sourcesharp)\engine\include;$(sourcesharp)\runtime\.deploy;$(metamod)\core;$(metamod)\core\sourcehook;$(hl2sdk)\hl2sdk-csgo\public;$(hl2sdk)\hl2sdk-csgo\public\engine;$(hl2sdk)\hl2sdk-csgo\public\mathlib;$(hl2sdk)\hl2sdk-csgo\public\vstdlib;$(hl2sdk)\hl2sdk-csgo\public\tier0;$(hl2sdk)\hl2sdk-csgo\public\tier1;$(hl2sdk)\hl2sdk-csgo\public\game\server;$(hl2sdk)\hl2sdk-csgo\game\shared;$(hl2sdk)\hl2sdk-csgo\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) -fcxx-exceptions</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DisableSpecificWarnings>4819;4828;5033;4005</DisableSpecificWarnings>
@@ -198,10 +198,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;SOURCE_ENGINE=21;NETWORK_VARS_ENABLED;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_ITERATOR_DEBUG_LEVEL=0;COMPILER_MSVC;COMPILER_MSVC32;DEBUG;_DEBUG;CMAKE_INTDIR=\"MinSizeRel\";sourcesharp_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>%(sourcesharp)\engine\src;%(sourcesharp)\engine\include;%(sourcesharp)\runtime\.deploy;%(metamod)\core;%(metamod)\core\sourcehook;%(hl2sdk)\hl2sdk-csgo\public;%(hl2sdk)\hl2sdk-csgo\public\engine;%(hl2sdk)\hl2sdk-csgo\public\mathlib;%(hl2sdk)\hl2sdk-csgo\public\vstdlib;%(hl2sdk)\hl2sdk-csgo\public\tier0;%(hl2sdk)\hl2sdk-csgo\public\tier1;%(hl2sdk)\hl2sdk-csgo\public\game\server;%(hl2sdk)\hl2sdk-csgo\game\shared;%(hl2sdk)\hl2sdk-csgo\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(sourcesharp)\engine\src;$(sourcesharp)\engine\include;$(sourcesharp)\runtime\.deploy;$(metamod)\core;$(metamod)\core\sourcehook;$(hl2sdk)\hl2sdk-csgo\public;$(hl2sdk)\hl2sdk-csgo\public\engine;$(hl2sdk)\hl2sdk-csgo\public\mathlib;$(hl2sdk)\hl2sdk-csgo\public\vstdlib;$(hl2sdk)\hl2sdk-csgo\public\tier0;$(hl2sdk)\hl2sdk-csgo\public\tier1;$(hl2sdk)\hl2sdk-csgo\public\game\server;$(hl2sdk)\hl2sdk-csgo\game\shared;$(hl2sdk)\hl2sdk-csgo\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>%(sourcesharp)\engine\src;%(sourcesharp)\engine\include;%(sourcesharp)\runtime\.deploy;%(metamod)\core;%(metamod)\core\sourcehook;%(hl2sdk)\hl2sdk-csgo\public;%(hl2sdk)\hl2sdk-csgo\public\engine;%(hl2sdk)\hl2sdk-csgo\public\mathlib;%(hl2sdk)\hl2sdk-csgo\public\vstdlib;%(hl2sdk)\hl2sdk-csgo\public\tier0;%(hl2sdk)\hl2sdk-csgo\public\tier1;%(hl2sdk)\hl2sdk-csgo\public\game\server;%(hl2sdk)\hl2sdk-csgo\game\shared;%(hl2sdk)\hl2sdk-csgo\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(sourcesharp)\engine\src;$(sourcesharp)\engine\include;$(sourcesharp)\runtime\.deploy;$(metamod)\core;$(metamod)\core\sourcehook;$(hl2sdk)\hl2sdk-csgo\public;$(hl2sdk)\hl2sdk-csgo\public\engine;$(hl2sdk)\hl2sdk-csgo\public\mathlib;$(hl2sdk)\hl2sdk-csgo\public\vstdlib;$(hl2sdk)\hl2sdk-csgo\public\tier0;$(hl2sdk)\hl2sdk-csgo\public\tier1;$(hl2sdk)\hl2sdk-csgo\public\game\server;$(hl2sdk)\hl2sdk-csgo\game\shared;$(hl2sdk)\hl2sdk-csgo\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -225,7 +225,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>%(sourcesharp)\engine\src;%(sourcesharp)\engine\include;%(sourcesharp)\runtime\.deploy;%(metamod)\core;%(metamod)\core\sourcehook;%(hl2sdk)\hl2sdk-csgo\public;%(hl2sdk)\hl2sdk-csgo\public\engine;%(hl2sdk)\hl2sdk-csgo\public\mathlib;%(hl2sdk)\hl2sdk-csgo\public\vstdlib;%(hl2sdk)\hl2sdk-csgo\public\tier0;%(hl2sdk)\hl2sdk-csgo\public\tier1;%(hl2sdk)\hl2sdk-csgo\public\game\server;%(hl2sdk)\hl2sdk-csgo\game\shared;%(hl2sdk)\hl2sdk-csgo\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(sourcesharp)\engine\src;$(sourcesharp)\engine\include;$(sourcesharp)\runtime\.deploy;$(metamod)\core;$(metamod)\core\sourcehook;$(hl2sdk)\hl2sdk-csgo\public;$(hl2sdk)\hl2sdk-csgo\public\engine;$(hl2sdk)\hl2sdk-csgo\public\mathlib;$(hl2sdk)\hl2sdk-csgo\public\vstdlib;$(hl2sdk)\hl2sdk-csgo\public\tier0;$(hl2sdk)\hl2sdk-csgo\public\tier1;$(hl2sdk)\hl2sdk-csgo\public\game\server;$(hl2sdk)\hl2sdk-csgo\game\shared;$(hl2sdk)\hl2sdk-csgo\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) -fcxx-exceptions</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -243,10 +243,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;SOURCE_ENGINE=21;NETWORK_VARS_ENABLED;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_ITERATOR_DEBUG_LEVEL=0;COMPILER_MSVC;COMPILER_MSVC32;DEBUG;_DEBUG;CMAKE_INTDIR=\"RelWithDebInfo\";sourcesharp_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>%(sourcesharp)\engine\src;%(sourcesharp)\engine\include;%(sourcesharp)\runtime\.deploy;%(metamod)\core;%(metamod)\core\sourcehook;%(hl2sdk)\hl2sdk-csgo\public;%(hl2sdk)\hl2sdk-csgo\public\engine;%(hl2sdk)\hl2sdk-csgo\public\mathlib;%(hl2sdk)\hl2sdk-csgo\public\vstdlib;%(hl2sdk)\hl2sdk-csgo\public\tier0;%(hl2sdk)\hl2sdk-csgo\public\tier1;%(hl2sdk)\hl2sdk-csgo\public\game\server;%(hl2sdk)\hl2sdk-csgo\game\shared;%(hl2sdk)\hl2sdk-csgo\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(sourcesharp)\engine\src;$(sourcesharp)\engine\include;$(sourcesharp)\runtime\.deploy;$(metamod)\core;$(metamod)\core\sourcehook;$(hl2sdk)\hl2sdk-csgo\public;$(hl2sdk)\hl2sdk-csgo\public\engine;$(hl2sdk)\hl2sdk-csgo\public\mathlib;$(hl2sdk)\hl2sdk-csgo\public\vstdlib;$(hl2sdk)\hl2sdk-csgo\public\tier0;$(hl2sdk)\hl2sdk-csgo\public\tier1;$(hl2sdk)\hl2sdk-csgo\public\game\server;$(hl2sdk)\hl2sdk-csgo\game\shared;$(hl2sdk)\hl2sdk-csgo\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>%(sourcesharp)\engine\src;%(sourcesharp)\engine\include;%(sourcesharp)\runtime\.deploy;%(metamod)\core;%(metamod)\core\sourcehook;%(hl2sdk)\hl2sdk-csgo\public;%(hl2sdk)\hl2sdk-csgo\public\engine;%(hl2sdk)\hl2sdk-csgo\public\mathlib;%(hl2sdk)\hl2sdk-csgo\public\vstdlib;%(hl2sdk)\hl2sdk-csgo\public\tier0;%(hl2sdk)\hl2sdk-csgo\public\tier1;%(hl2sdk)\hl2sdk-csgo\public\game\server;%(hl2sdk)\hl2sdk-csgo\game\shared;%(hl2sdk)\hl2sdk-csgo\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(sourcesharp)\engine\src;$(sourcesharp)\engine\include;$(sourcesharp)\runtime\.deploy;$(metamod)\core;$(metamod)\core\sourcehook;$(hl2sdk)\hl2sdk-csgo\public;$(hl2sdk)\hl2sdk-csgo\public\engine;$(hl2sdk)\hl2sdk-csgo\public\mathlib;$(hl2sdk)\hl2sdk-csgo\public\vstdlib;$(hl2sdk)\hl2sdk-csgo\public\tier0;$(hl2sdk)\hl2sdk-csgo\public\tier1;$(hl2sdk)\hl2sdk-csgo\public\game\server;$(hl2sdk)\hl2sdk-csgo\game\shared;$(hl2sdk)\hl2sdk-csgo\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
