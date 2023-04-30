@@ -12,6 +12,7 @@ CMakeSettings.json
 /cmake-build-debug/
 
 /.idea/
+/.msvc/build
 
 # vscode cpptools output file
 # vs with cmake default output files

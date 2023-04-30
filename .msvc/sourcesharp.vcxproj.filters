@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\src\engine.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\sourcesharp.cpp">
+      <Filter>Loader</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Loader">
+      <UniqueIdentifier>{d5d609e8-b59d-4270-b130-3e2d3b4dfc65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{C0EA8DA8-B43A-35B1-B2F5-C37B4B06329D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{eda33694-c47b-4e21-b29e-5343ade1c83f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\sourcesharp.h">
+      <Filter>Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\engine.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\engine_wrappers.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
