@@ -7,6 +7,9 @@
     <ClCompile Include="..\src\sourcesharp.cpp">
       <Filter>Loader</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\CommandManager.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Loader">
@@ -52,6 +55,15 @@
     </ClInclude>
     <ClInclude Include="..\include\modules\sourcesharp.h">
       <Filter>Include\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\engine_interfaces.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CommandManager.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\engine_shared.h">
+      <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

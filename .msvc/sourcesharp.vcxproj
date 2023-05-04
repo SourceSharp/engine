@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+    <PreferredToolArchitecture>x86</PreferredToolArchitecture>
   </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -26,7 +26,7 @@
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
     <Platform>Win32</Platform>
-    <ProjectName>engine</ProjectName>
+    <ProjectName>Engine</ProjectName>
     <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -100,7 +100,7 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <UseFullPaths>false</UseFullPaths>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;SOURCE_ENGINE=21;NETWORK_VARS_ENABLED;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_ITERATOR_DEBUG_LEVEL=0;COMPILER_MSVC;COMPILER_MSVC32;DEBUG;_DEBUG;CMAKE_INTDIR="Debug";sourcesharp_EXPORTS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;SOURCE_ENGINE=21;ENGINE_CSGO=21;NETWORK_VARS_ENABLED;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_ITERATOR_DEBUG_LEVEL=0;COMPILER_MSVC;COMPILER_MSVC32;DEBUG;_DEBUG;CMAKE_INTDIR="Debug";sourcesharp_EXPORTS</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
@@ -145,7 +145,7 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <UseFullPaths>false</UseFullPaths>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;SOURCE_ENGINE=21;NETWORK_VARS_ENABLED;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_ITERATOR_DEBUG_LEVEL=0;COMPILER_MSVC;COMPILER_MSVC32;DEBUG;_DEBUG;CMAKE_INTDIR="Release";sourcesharp_EXPORTS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;SOURCE_ENGINE=21;ENGINE_CSGO=21;NETWORK_VARS_ENABLED;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_ITERATOR_DEBUG_LEVEL=0;COMPILER_MSVC;COMPILER_MSVC32;DEBUG;_DEBUG;CMAKE_INTDIR="Release";sourcesharp_EXPORTS</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
@@ -269,6 +269,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\CommandManager.cpp" />
     <ClCompile Include="..\src\engine.cpp" />
     <ClCompile Include="..\src\sourcesharp.cpp" />
   </ItemGroup>
@@ -279,9 +280,12 @@
     <ClInclude Include="..\include\modules\event.h" />
     <ClInclude Include="..\include\modules\sourcesharp.h" />
     <ClInclude Include="..\include\modules\_export.h" />
+    <ClInclude Include="..\src\CommandManager.h" />
     <ClInclude Include="..\src\engine.h" />
+    <ClInclude Include="..\src\engine_shared.h" />
     <ClInclude Include="..\src\engine_wrappers.h" />
     <ClInclude Include="..\src\sourcesharp.h" />
+    <ClInclude Include="..\src\engine_interfaces.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

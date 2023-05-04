@@ -19,7 +19,8 @@ class CCommand;
 #    define snprintf _snprintf
 #endif
 
-class SourceSharp : public ISmmPlugin, public IMetamodListener
+class SourceSharp : public ISmmPlugin,
+                    public IMetamodListener
 {
 public:
     bool Load(PluginId id, ISmmAPI* ismm, char* error, size_t maxlen,
@@ -67,7 +68,7 @@ public:
 // TODO
 // https://github.com/alliedmodders/sourcemod/blob/97f2fc9d7fa49d334c6b70bb8b0d779b11a74ee5/core/sourcemm_api.cpp#L46
 
-extern SourceSharp  g_SourceSharp;
+extern SourceSharp g_SourceSharp;
 
 PLUGIN_GLOBALVARS();
 

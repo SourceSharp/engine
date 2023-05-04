@@ -9,7 +9,7 @@
 #include "sourcesharp.h"
 #include "SourceSharp.Runtime.h"
 #include "engine.h"
-#include <stdio.h>
+#include <cstdio>
 
 SourceSharp             g_SourceSharp;
 IServerGameDLL*         server            = nullptr;
@@ -27,8 +27,6 @@ SH_DECL_HOOK6(IServerGameDLL, LevelInit, SH_NOATTRIB, 0, bool, char const*, char
 
 SH_DECL_HOOK3_void(IServerGameDLL, ServerActivate, SH_NOATTRIB, 0, edict_t*, int, int);
 
-SH_DECL_HOOK1_void(IServerGameDLL, GameFrame, SH_NOATTRIB, 0, bool);
-
 SH_DECL_HOOK0_void(IServerGameDLL, LevelShutdown, SH_NOATTRIB, 0);
 
 SH_DECL_HOOK2_void(IServerGameClients, ClientActive, SH_NOATTRIB, 0, edict_t*, bool);
@@ -37,14 +35,11 @@ SH_DECL_HOOK1_void(IServerGameClients, ClientDisconnect, SH_NOATTRIB, 0, edict_t
 
 SH_DECL_HOOK2_void(IServerGameClients, ClientPutInServer, SH_NOATTRIB, 0, edict_t*, char const*);
 
-SH_DECL_HOOK1_void(IServerGameClients, SetCommandClient, SH_NOATTRIB, 0, int);
-
 SH_DECL_HOOK1_void(IServerGameClients, ClientSettingsChanged, SH_NOATTRIB, 0, edict_t*);
 
 SH_DECL_HOOK5(IServerGameClients, ClientConnect, SH_NOATTRIB, 0, bool, edict_t*, const char*, const char*, char*, int);
 
 SH_DECL_HOOK2(IGameEventManager2, FireEvent, SH_NOATTRIB, 0, bool, IGameEvent*, bool);
-
 
 /**
  * Something like this is needed to register cvars/CON_COMMANDs.
@@ -85,25 +80,15 @@ bool SourceSharp::Load(PluginId id, ISmmAPI* ismm, char* error, size_t maxlen, b
 
     SH_ADD_HOOK_MEMFUNC(IServerGameDLL, LevelInit, server, this, &SourceSharp::Hook_LevelInit, true);
     SH_ADD_HOOK_MEMFUNC(IServerGameDLL, ServerActivate, server, this, &SourceSharp::Hook_ServerActivate, true);
-    SH_ADD_HOOK_MEMFUNC(IServerGameDLL, GameFrame, server, this, &SourceSharp::Hook_GameFrame, true);
     SH_ADD_HOOK_MEMFUNC(IServerGameDLL, LevelShutdown, server, this, &SourceSharp::Hook_LevelShutdown, false);
     SH_ADD_HOOK_MEMFUNC(IServerGameClients, ClientActive, gameclients, this, &SourceSharp::Hook_ClientActive, true);
-    SH_ADD_HOOK_MEMFUNC(IServerGameClients, ClientDisconnect, gameclients, this, &SourceSharp::Hook_ClientDisconnect,
-                        true);
-    SH_ADD_HOOK_MEMFUNC(IServerGameClients, ClientPutInServer, gameclients, this, &SourceSharp::Hook_ClientPutInServer,
-                        true);
-    SH_ADD_HOOK_MEMFUNC(IServerGameClients, SetCommandClient, gameclients, this, &SourceSharp::Hook_SetCommandClient,
-                        true);
-    SH_ADD_HOOK_MEMFUNC(IServerGameClients, ClientSettingsChanged, gameclients, this,
-                        &SourceSharp::Hook_ClientSettingsChanged, false);
+    SH_ADD_HOOK_MEMFUNC(IServerGameClients, ClientDisconnect, gameclients, this, &SourceSharp::Hook_ClientDisconnect, true);
+    SH_ADD_HOOK_MEMFUNC(IServerGameClients, ClientPutInServer, gameclients, this, &SourceSharp::Hook_ClientPutInServer, true);
+    SH_ADD_HOOK_MEMFUNC(IServerGameClients, ClientSettingsChanged, gameclients, this, &SourceSharp::Hook_ClientSettingsChanged, false);
     SH_ADD_HOOK_MEMFUNC(IServerGameClients, ClientConnect, gameclients, this, &SourceSharp::Hook_ClientConnect, false);
 
-#if SOURCE_ENGINE >= SE_ORANGEBOX
     g_pCVar = icvar;
     ConVar_Register(0, &s_BaseAccessor);
-#else
-    ConCommandBaseMgr::OneTimeInit(&s_BaseAccessor);
-#endif
 
     g_Core.Load();
 
@@ -122,19 +107,12 @@ bool SourceSharp::Unload(char* error, size_t maxlen)
 
     SH_REMOVE_HOOK_MEMFUNC(IServerGameDLL, LevelInit, server, this, &SourceSharp::Hook_LevelInit, true);
     SH_REMOVE_HOOK_MEMFUNC(IServerGameDLL, ServerActivate, server, this, &SourceSharp::Hook_ServerActivate, true);
-    SH_REMOVE_HOOK_MEMFUNC(IServerGameDLL, GameFrame, server, this, &SourceSharp::Hook_GameFrame, true);
     SH_REMOVE_HOOK_MEMFUNC(IServerGameDLL, LevelShutdown, server, this, &SourceSharp::Hook_LevelShutdown, false);
     SH_REMOVE_HOOK_MEMFUNC(IServerGameClients, ClientActive, gameclients, this, &SourceSharp::Hook_ClientActive, true);
-    SH_REMOVE_HOOK_MEMFUNC(IServerGameClients, ClientDisconnect, gameclients, this,
-                           &SourceSharp::Hook_ClientDisconnect, true);
-    SH_REMOVE_HOOK_MEMFUNC(IServerGameClients, ClientPutInServer, gameclients, this,
-                           &SourceSharp::Hook_ClientPutInServer, true);
-    SH_REMOVE_HOOK_MEMFUNC(IServerGameClients, SetCommandClient, gameclients, this,
-                           &SourceSharp::Hook_SetCommandClient, true);
-    SH_REMOVE_HOOK_MEMFUNC(IServerGameClients, ClientSettingsChanged, gameclients, this,
-                           &SourceSharp::Hook_ClientSettingsChanged, false);
-    SH_REMOVE_HOOK_MEMFUNC(IServerGameClients, ClientConnect, gameclients, this, &SourceSharp::Hook_ClientConnect,
-                           false);
+    SH_REMOVE_HOOK_MEMFUNC(IServerGameClients, ClientDisconnect, gameclients, this, &SourceSharp::Hook_ClientDisconnect, true);
+    SH_REMOVE_HOOK_MEMFUNC(IServerGameClients, ClientPutInServer, gameclients, this, &SourceSharp::Hook_ClientPutInServer, true);
+    SH_REMOVE_HOOK_MEMFUNC(IServerGameClients, ClientSettingsChanged, gameclients, this, &SourceSharp::Hook_ClientSettingsChanged, false);
+    SH_REMOVE_HOOK_MEMFUNC(IServerGameClients, ClientConnect, gameclients, this, &SourceSharp::Hook_ClientConnect, false);
 
     g_Core.Unload();
 
@@ -153,9 +131,6 @@ void SourceSharp::Hook_ServerActivate(edict_t* pEdictList, int edictCount, int c
 
 void SourceSharp::AllPluginsLoaded()
 {
-    /* This is where we'd do stuff that relies on the mod or other plugins
-     * being initialized (for example, cvars added and events registered).
-     */
 }
 
 void SourceSharp::Hook_ClientActive(edict_t* pEntity, bool bLoadGame)
@@ -212,16 +187,6 @@ void SourceSharp::Hook_ClientDisconnect(edict_t* pEntity)
     META_LOG(g_PLAPI, "Hook_ClientDisconnect(%d)", IndexOfEdict(pEntity));
 }
 
-void SourceSharp::Hook_GameFrame(bool simulating)
-{
-    /**
-     * simulating:
-     * ***********
-     * true  | game is ticking
-     * false | game is not ticking
-     */
-}
-
 bool SourceSharp::Hook_LevelInit(const char* pMapName,
                                  const char* pMapEntities,
                                  const char* pOldLevel,
@@ -239,11 +204,6 @@ void SourceSharp::Hook_LevelShutdown()
     META_LOG(g_PLAPI, "Hook_LevelShutdown()");
 }
 
-void SourceSharp::Hook_SetCommandClient(int index)
-{
-    META_LOG(g_PLAPI, "Hook_SetCommandClient(%d)", index);
-}
-
 bool SourceSharp::Pause(char* error, size_t maxlen)
 {
     return true;
@@ -256,7 +216,7 @@ bool SourceSharp::Unpause(char* error, size_t maxlen)
 
 const char* SourceSharp::GetLicense()
 {
-    return "Public Domain";
+    return "Apache-2.0 license";
 }
 
 const char* SourceSharp::GetVersion()

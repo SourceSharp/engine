@@ -6,60 +6,49 @@
  * ======================================================
  */
 
-#ifndef SAMPLE_MM_CORE_H
-#define SAMPLE_MM_CORE_H
+#ifndef SOURCESHARP_ENGINE_ENGINE_H
+#define SOURCESHARP_ENGINE_ENGINE_H
 
 #include "Core.h"
 #include "sourcesharp.h"
+#include "engine_interfaces.h"
 
 #include <string>
 #include <unordered_set>
 #include <ctime>
 
-#include <igameevents.h>
-#include <iplayerinfo.h>
-#include <iconvar.h>
+
 
 struct edict_t;
 class CCommand;
-
-extern IServerGameDLL*         server;
-extern IServerGameClients*     gameclients;
-extern IVEngineServer*         engine;
-extern IServerPluginHelpers*   helpers;
-extern IGameEventManager2*     gameevents;
-extern IServerPluginCallbacks* vsp_callbacks;
-extern IPlayerInfoManager*     playerinfomanager;
-extern ICvar*                  icvar;
-extern CGlobalVars*            gpGlobals;
-
 
 class Core
 {
 public:
     void Load();
-
     void Unload();
+
+private:
+    void Hook_GameFrame(bool simulating) const;
 
 // SourceSharp
 public:
     void LogError(const char* pMessage) const
     {
-        META_LOG(reinterpret_cast<ISmmPlugin*>(&g_SourceSharp), "[%s] INFO: ", GetTimeString(time(nullptr)), pMessage);
+        META_LOG(m_pPlugin, "[%s] INFO: ", GetTimeString(time(nullptr)).c_str(), pMessage);
     }
-    void LogMessage(const char* pMessage)
+    void LogMessage(const char* pMessage) const
     {
-        META_LOG(reinterpret_cast<ISmmPlugin*>(&g_SourceSharp), "[%s] Fail: ", GetTimeString(time(nullptr)), pMessage);
+        META_LOG(m_pPlugin, "[%s] Fail: ", GetTimeString(time(nullptr)).c_str(), pMessage);
     }
 
     const char* GetGamePath() const {
-        const char* pBaseDir = g_SMAPI->GetBaseDir();
+        const char*  pBaseDir = m_pApi->GetBaseDir();
         const size_t len = strlen(pBaseDir);
-        char path[256];
         for (size_t i = len - 1; i < len; i--)
         {
             #if _WIN32
-            if (pBaseDir[i] == '\\')
+            if (pBaseDir[i] == '\\' || pBaseDir[i] == '/')
             #else
             if (pBaseDir[i] == '/')
             #endif
@@ -74,7 +63,7 @@ public:
     int GetMaxClients() const {
         // TODO 从engine读取
         #if SOURCE_ENGINE == ENGINE_CSGO
-        return 64;
+        return gpGlobals->maxClients;
         #else
         int min, max, def;
         gameclients->GetPlayerLimits(min, max, def);
@@ -87,30 +76,22 @@ public:
     void InsertServerCommand(const char* pCommand) const { engine->InsertServerCommand(pCommand); }
     void ServerExecute() const { engine->ServerExecute(); }
 
-// ConCommand
-public:
-    void RegServerCommand(const char* command);
-    void RegClientCommand(const char* command);
-
 private:
-#if SOURCE_ENGINE >= SE_ORANGEBOX
-    void Hook_ClientCommand(edict_t* pEntity, const CCommand& args);
-#else
-    void Hook_ClientCommand(edict_t* pEntity);
-#endif
-
-private:
-    const char* GetTimeString(time_t time) const
+    static std::string GetTimeString(time_t time)
     {
         char buffer[64];
         auto timeinfo = localtime(&time);
         strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", timeinfo);
-        return buffer;
+        return std::string(buffer);
     }
 
 private:
     std::unordered_set<std::string> m_ServerCommands;
     std::unordered_set<std::string> m_ClientCommands;
+
+private:
+    ISmmAPI* m_pApi;
+    ISmmPlugin* m_pPlugin;
 };
 
 extern Core g_Core;
@@ -139,4 +120,4 @@ extern Core g_Core;
         g_Core.FUNCNAME(a1); \
     }
 
-#endif // SAMPLE_MM_CORE_H
+#endif // SOURCESHARP_ENGINE_ENGINE_H
