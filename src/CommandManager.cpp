@@ -6,8 +6,8 @@
 #include <engine_interfaces.h>
 #include <sourcehook.h>
 
-#include "sourcesharp.h"
 #include "modules/concommand.h"
+#include "sourcesharp.h"
 
 CommandManager g_CommandManager;
 
@@ -36,7 +36,7 @@ void CommandManager::OnShutdown()
 
     for (const auto& [key, info] : m_Commands)
     {
-         if (info->m_bRegister)
+        if (info->m_bRegister)
             g_SMAPI->UnregisterConCommandBase(g_PLAPI, info->m_pCommand);
         SH_REMOVE_HOOK_ID(info->m_bHookId);
         delete info;
@@ -55,7 +55,7 @@ ConCommand* CommandManager::FindOrCreateCommand(const char* name)
     if (info != m_Commands.end())
         return info->second->m_pCommand;
 
-    auto* pInfo = new CommandInfo_t;
+    auto* pInfo    = new CommandInfo_t;
     auto* pCommand = g_pCVar->FindCommand(name);
     if (!pCommand)
     {
@@ -82,7 +82,7 @@ void CommandManager::Hook_SetCommandClient(int client)
 
 void CommandManager::Hook_ClientCommand(edict_t* pClient, const CCommand& command)
 {
-    // TODO 
+    // TODO
     // OnClientCommand in IPlayerManager
 
     if (!pClient || pClient->IsFree())
@@ -144,7 +144,7 @@ void CommandManager::Hook_CommandDispatch(const CCommand& command)
 void CommandManager::ConCommandDispatch(const CCommand& command)
 {
     const auto client = GetCommandClient();
-    const auto pName   = command.Arg(0);
+    const auto pName  = command.Arg(0);
 
     auto maxRet = 0;
     for (auto& name : m_ServerCommands)
@@ -171,7 +171,6 @@ void CommandManager::ConCommandDispatch(const CCommand& command)
         }
     }
 }
-
 
 SS_API void RegClientCommand(const char* name)
 {

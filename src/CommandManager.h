@@ -22,6 +22,13 @@ struct CommandInfo_t {
     ConCommand* m_pCommand;
     bool        m_bRegister;
     int         m_bHookId;
+
+    CommandInfo_t()
+    {
+        m_pCommand  = nullptr;
+        m_bRegister = false;
+        m_bHookId   = 0;
+    }
 };
 
 class CommandManager : public ISourceSharpModule

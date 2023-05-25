@@ -79,9 +79,9 @@ BraceWrapping:
   # extern之后
   AfterExternBlock: false
   # catch之前
-  BeforeCatch: false
+  BeforeCatch: true
   # else之前
-  BeforeElse: false
+  BeforeElse: true
   # 缩进大括号
   IndentBraces: false
   # 分离空函数
