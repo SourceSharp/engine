@@ -103,6 +103,8 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;SOURCE_ENGINE=21;ENGINE_CSGO=21;NETWORK_VARS_ENABLED;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_ITERATOR_DEBUG_LEVEL=0;COMPILER_MSVC;COMPILER_MSVC32;DEBUG;_DEBUG;CMAKE_INTDIR="Debug";sourcesharp_EXPORTS</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <RemoveUnreferencedCodeData>false</RemoveUnreferencedCodeData>
+      <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;SOURCE_ENGINE=21;NETWORK_VARS_ENABLED;_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_ITERATOR_DEBUG_LEVEL=0;COMPILER_MSVC;COMPILER_MSVC32;DEBUG;CMAKE_INTDIR=\"Debug\";sourcesharp_EXPORTS</PreprocessorDefinitions>
@@ -270,6 +272,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\CommandManager.cpp" />
+    <ClCompile Include="..\src\ConVarManager.cpp" />
     <ClCompile Include="..\src\engine.cpp" />
     <ClCompile Include="..\src\sourcesharp.cpp" />
   </ItemGroup>
@@ -281,11 +284,15 @@
     <ClInclude Include="..\include\modules\sourcesharp.h" />
     <ClInclude Include="..\include\modules\_export.h" />
     <ClInclude Include="..\src\CommandManager.h" />
+    <ClInclude Include="..\src\ConVarManager.h" />
     <ClInclude Include="..\src\engine.h" />
     <ClInclude Include="..\src\engine_shared.h" />
     <ClInclude Include="..\src\engine_wrappers.h" />
     <ClInclude Include="..\src\sourcesharp.h" />
     <ClInclude Include="..\src\engine_interfaces.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

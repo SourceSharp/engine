@@ -11,6 +11,7 @@
 #include <sourcesharp.h>
 
 #include "CommandManager.h"
+#include "ConVarManager.h"
 
 Core g_Core;
 
@@ -23,6 +24,7 @@ void Core::Load()
     m_pPlugin = g_PLAPI;
 
     g_CommandManager.OnLoad();
+    g_ConVarManager.OnLoad();
 
     SH_ADD_HOOK(IServerGameDLL, GameFrame, server, SH_MEMBER(this, &Core::Hook_GameFrame), false);
 }
@@ -30,6 +32,7 @@ void Core::Load()
 void Core::Unload()
 {
     g_CommandManager.OnShutdown();
+    g_ConVarManager.OnShutdown();
 
     m_pApi = nullptr;
     m_pPlugin = nullptr;
@@ -37,7 +40,7 @@ void Core::Unload()
 
 void Core::Hook_GameFrame(bool simulating) const
 {
-    //OnGameFrame(simulating, gpGlobals->tickcount, gpGlobals->curtime);
+    OnGameFrame(simulating, gpGlobals->tickcount, gpGlobals->curtime);
 }
 
 

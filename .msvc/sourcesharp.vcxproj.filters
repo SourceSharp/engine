@@ -10,6 +10,9 @@
     <ClCompile Include="..\src\CommandManager.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\ConVarManager.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Loader">
@@ -26,6 +29,9 @@
     </Filter>
     <Filter Include="Include\Module">
       <UniqueIdentifier>{152d5e03-eb21-44e0-a6ea-2cca417a47af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Symbol">
+      <UniqueIdentifier>{4fd56d47-0027-4afa-82a4-2835cf85a086}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -65,5 +71,11 @@
     <ClInclude Include="..\src\engine_shared.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\ConVarManager.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>
