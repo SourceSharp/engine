@@ -46,7 +46,6 @@ bool ConVarManager::InstallGlobalChangeHook(SSConVar* pConVar)
     return true;
 }
 
-
 SSConVar* ConVarManager::CreateConVar(const char* pName, const char* pDefValue, const char* pDescription, int nFlags, bool bHasMin, float flMin, bool bHasMax, float flMax)
 {
     auto pVar = FindConVar(pName);
@@ -59,8 +58,8 @@ SSConVar* ConVarManager::CreateConVar(const char* pName, const char* pDefValue, 
     auto name = strdup(pName);
     V_strlower(name);
 
-    const auto pCvar = new ConVar(name, pDefValue, nFlags, pDescription, bHasMin, flMin, bHasMax, flMax);
-    pVar = new SSConVar(pCvar, false);
+    const auto pCvar                        = new ConVar(name, pDefValue, nFlags, pDescription, bHasMin, flMin, bHasMax, flMax);
+    pVar                                    = new SSConVar(pCvar, false);
     m_ConVars[std::string(pVar->GetName())] = pVar;
 
     return pVar;
@@ -68,7 +67,7 @@ SSConVar* ConVarManager::CreateConVar(const char* pName, const char* pDefValue, 
 
 SSConVar* ConVarManager::FindConVar(const char* pName)
 {
-    const auto key  = std::string(pName);
+    const auto key = std::string(pName);
     const auto var = m_ConVars.find(key);
     if (var != m_ConVars.end())
     {
@@ -83,7 +82,7 @@ SSConVar* ConVarManager::FindConVar(const char* pName)
         return nullptr;
     }
 
-    const auto pVar = new SSConVar(pCvar, false);
+    const auto pVar                         = new SSConVar(pCvar, false);
     m_ConVars[std::string(pVar->GetName())] = pVar;
     return pVar;
 }
@@ -98,22 +97,22 @@ inline ConVar* SSConVar::GetBase()
     return m_pConVar;
 }
 
-#define SSCVAR_INVOKE_GET(NAME, TYPE)           \
-    TYPE SSConVar::Get##NAME()     \
-    {                                           \
-        return m_pConVar->Get##NAME();          \
+#define SSCVAR_INVOKE_GET(NAME, TYPE)  \
+    TYPE SSConVar::Get##NAME()         \
+    {                                  \
+        return m_pConVar->Get##NAME(); \
     }
 
-#define SSCVAR_INVOKE_SET(NAME, TYPE)               \
+#define SSCVAR_INVOKE_SET(NAME, TYPE) \
+    void SSConVar::Set##NAME(TYPE v)  \
+    {                                 \
+        m_pConVar->Set##NAME(v);      \
+    }
+
+#define SSCVAR_INVOKE_SETV(NAME, TYPE) \
     void SSConVar::Set##NAME(TYPE v)   \
-    {                                               \
-        m_pConVar->Set##NAME(v);                    \
-    }
-
-#define SSCVAR_INVOKE_SETV(NAME, TYPE)             \
-    void SSConVar::Set##NAME(TYPE v) \
-    {                                             \
-        m_pConVar->SetValue(v);                  \
+    {                                  \
+        m_pConVar->SetValue(v);        \
     }
 
 // Info
@@ -142,7 +141,6 @@ void SSConVar::SetFlags(int v)
 {
     m_pConVar->AddFlags(v);
 }
-
 
 // Bounds
 float SSConVar::GetMin()
