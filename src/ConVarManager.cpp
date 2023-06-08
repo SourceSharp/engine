@@ -55,10 +55,12 @@ SSConVar* ConVarManager::CreateConVar(const char* pName, const char* pDefValue, 
     if (g_pCVar->FindCommand(pName))
         return nullptr;
 
-    auto name = strdup(pName);
+    const auto name = strdup(pName);
+    const auto defV = strdup(pDefValue);
+    const auto desc = strdup(pDescription);
     V_strlower(name);
 
-    const auto pCvar                        = new ConVar(name, pDefValue, nFlags, pDescription, bHasMin, flMin, bHasMax, flMax);
+    const auto pCvar                        = new ConVar(name, defV, nFlags, desc, bHasMin, flMin, bHasMax, flMax);
     pVar                                    = new SSConVar(pCvar, false);
     m_ConVars[std::string(pVar->GetName())] = pVar;
 
