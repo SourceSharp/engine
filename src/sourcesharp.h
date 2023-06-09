@@ -63,6 +63,9 @@ public:
     const char* GetVersion();
     const char* GetDate();
     const char* GetLogTag();
+
+private:
+    bool m_bIsLoaded;
 };
 
 // TODO

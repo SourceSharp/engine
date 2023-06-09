@@ -62,6 +62,8 @@ bool SourceSharp::Load(PluginId id, ISmmAPI* ismm, char* error, size_t maxlen, b
 {
     PLUGIN_SAVEVARS();
 
+    m_bIsLoaded = false;
+
     GET_V_IFACE_CURRENT(GetEngineFactory, engine, IVEngineServer, INTERFACEVERSION_VENGINESERVER);
     GET_V_IFACE_CURRENT(GetEngineFactory, gameevents, IGameEventManager2, INTERFACEVERSION_GAMEEVENTSMANAGER2);
     GET_V_IFACE_CURRENT(GetEngineFactory, helpers, IServerPluginHelpers, INTERFACEVERSION_ISERVERPLUGINHELPERS);
@@ -92,18 +94,16 @@ bool SourceSharp::Load(PluginId id, ISmmAPI* ismm, char* error, size_t maxlen, b
 
     g_Core.Load();
 
-    const auto loadResult = InitializeSourceSharp();
-    if (loadResult != 0)
-    {
-        Error(error, maxlen, "Failed to initialize SourceSharp, code: %d", loadResult);
-    }
-
     return true;
 }
 
 bool SourceSharp::Unload(char* error, size_t maxlen)
 {
-    ShutdownSourceSharp();
+    if (m_bIsLoaded)
+    {
+        m_bIsLoaded = false;
+        ShutdownSourceSharp();
+    }
 
     SH_REMOVE_HOOK_MEMFUNC(IServerGameDLL, LevelInit, server, this, &SourceSharp::Hook_LevelInit, true);
     SH_REMOVE_HOOK_MEMFUNC(IServerGameDLL, ServerActivate, server, this, &SourceSharp::Hook_ServerActivate, true);
@@ -194,7 +194,19 @@ bool SourceSharp::Hook_LevelInit(const char* pMapName,
                                  bool        loadGame,
                                  bool        background)
 {
-    META_LOG(g_PLAPI, "Hook_LevelInit(%s)", pMapName);
+    if (m_bIsLoaded)
+    {
+        META_LOG(g_PLAPI, "Hook_LevelInit(%s)", pMapName);
+    }
+    else
+    {
+        const auto loadResult = InitializeSourceSharp();
+        if (loadResult != 0)
+        {
+            Error("Failed to initialize SourceSharp, code: %d", loadResult);
+        }
+        m_bIsLoaded = true;
+    }
 
     return true;
 }
