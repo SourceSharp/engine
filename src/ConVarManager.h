@@ -9,6 +9,7 @@
 #ifndef SOURCESHARP_ENGINE_CONVAR_MANAGER_H
 #define SOURCESHARP_ENGINE_CONVAR_MANAGER_H
 
+#include <convar.h>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
@@ -17,7 +18,23 @@
 #include "modules/convar.h"
 
 class ConVar;
-class SSConVar;
+class SSConVar
+{
+public:
+    bool ReplicateToPlayers(const int pPlayers[], int nPlayers) const;
+
+    SS_INLINE ConVar* GetBase() const
+    {
+        return m_pConVar;
+    }
+
+private:
+    ConVar* m_pConVar;
+    bool    m_bRegister;
+
+public:
+    SSConVar(ConVar* pVar, bool bRegister);
+};
 
 class ConVarManager : public ISourceSharpModule
 {

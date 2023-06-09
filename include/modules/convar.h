@@ -11,61 +11,47 @@
 
 #include "_export.h"
 
-class ConVar;
+class SSConVar;
 
-class SS_CLASS_EXPORT SSConVar
-{
-public:
-    const char* GetName();
-    const char* GetDefault();
-    const char* GetDescription();
+DECL_CLASS_MEMBER_EXPORT_GET(SSConVar, Name, const char*);
+DECL_CLASS_MEMBER_EXPORT_GET(SSConVar, Default, const char*);
+DECL_CLASS_MEMBER_EXPORT_GET(SSConVar, Description, const char*);
 
-    const char* GetString();
-    float       GetFloat();
-    int         GetInt();
-    bool        GetBool();
+SS_API int  SSConVarGetFlags(const SSConVar* pVar);
+SS_API void SSConVarAddFlags(const SSConVar* pVar, int nFlags);
 
-    void SetString(const char* pValue);
-    void SetFloat(float value);
-    void SetInt(int value);
-    void SetBool(bool value);
+// value
+DECL_CLASS_MEMBER_EXPORT_GET(SSConVar, Int, int);
+DECL_CLASS_MEMBER_EXPORT_SET(SSConVar, Int, int);
+DECL_CLASS_MEMBER_EXPORT_GET(SSConVar, Bool, bool);
+DECL_CLASS_MEMBER_EXPORT_SET(SSConVar, Bool, bool);
+DECL_CLASS_MEMBER_EXPORT_GET(SSConVar, Float, float);
+DECL_CLASS_MEMBER_EXPORT_SET(SSConVar, Float, float);
+DECL_CLASS_MEMBER_EXPORT_GET(SSConVar, String, const char*);
+DECL_CLASS_MEMBER_EXPORT_SET(SSConVar, String, const char*);
 
-    void SetFlags(int flags);
-    int  GetFlags();
-
-    void  SetMin(float value);
-    float GetMin();
-    bool  GetHasMin();
-    void  SetHasMin(bool has);
-
-    void  SetMax(float value);
-    float GetMax();
-    bool  GetHasMax();
-    void  SetHasMax(bool has);
-
-    bool ReplicateToPlayers(const int pPlayers[], int nPlayers);
-
-    ConVar* GetBase();
-
-private:
-    ConVar* m_pConVar;
-    bool    m_bRegister;
-
-public:
-    SSConVar(ConVar* pVar, bool bRegister);
-};
-
-SS_API const char* GetSSConVarName(SSConVar* pVar);
-SS_API const char* GetSSConVarDefault(SSConVar* pVar);
+// bound
+DECL_CLASS_MEMBER_EXPORT_GET(SSConVar, MinValue, float);
+DECL_CLASS_MEMBER_EXPORT_GET(SSConVar, MaxValue, float);
+DECL_CLASS_MEMBER_EXPORT_GET(SSConVar, HasMin, bool);
+DECL_CLASS_MEMBER_EXPORT_GET(SSConVar, HasMax, bool);
+SS_API void SSConVarSetBound(const SSConVar* pVar,
+                             bool            bHasMin,
+                             float           flMin,
+                             bool            bHasMax,
+                             float           flMax);
+// function
+SS_API void SSConVarRevert(const SSConVar* pVar);
+SS_API bool SSConVarReplicateToPlayers(const SSConVar* pVar, const int pPlayers[], int nPlayers);
 
 SS_API SSConVar* CreateConVar(const char* pName,
-                              const char* pDefValue,
+                              const char* pDECLValue,
                               const char* pDescription,
-                              const int   nFlags,
-                              const bool  bHasMin,
-                              const float flMin,
-                              const bool  bHasMax,
-                              const float flMax);
+                              int         nFlags,
+                              bool        bHasMin,
+                              float       flMin,
+                              bool        bHasMax,
+                              float       flMax);
 
 SS_API SSConVar* FindConVar(const char* pName);
 

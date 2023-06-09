@@ -25,15 +25,15 @@ void ConVarManager::OnShutdown()
 
 void ConVarManager::Hook_ConVarChanged(ConVar* pConVar, const char* oldValue, float flOldValue)
 {
+    const auto name = pConVar->GetName();
     if (m_ChangedHooks.find(pConVar) == m_ChangedHooks.end())
         return;
 
-    const auto name = pConVar->GetName();
     const auto pVar = FindConVar(name);
     if (pVar == nullptr)
         return;
 
-    OnConVarChanged(name, oldValue, pVar->GetString());
+    OnConVarChanged(name, oldValue, pConVar->GetString());
 }
 
 bool ConVarManager::InstallGlobalChangeHook(SSConVar* pConVar)
@@ -60,9 +60,9 @@ SSConVar* ConVarManager::CreateConVar(const char* pName, const char* pDefValue, 
     const auto desc = strdup(pDescription);
     V_strlower(name);
 
-    const auto pCvar                        = new ConVar(name, defV, nFlags, desc, bHasMin, flMin, bHasMax, flMax);
-    pVar                                    = new SSConVar(pCvar, false);
-    m_ConVars[std::string(pVar->GetName())] = pVar;
+    const auto pCvar             = new ConVar(name, defV, nFlags, desc, bHasMin, flMin, bHasMax, flMax);
+    pVar                         = new SSConVar(pCvar, false);
+    m_ConVars[std::string(name)] = pVar;
 
     return pVar;
 }
@@ -84,8 +84,9 @@ SSConVar* ConVarManager::FindConVar(const char* pName)
         return nullptr;
     }
 
-    const auto pVar                         = new SSConVar(pCvar, false);
-    m_ConVars[std::string(pVar->GetName())] = pVar;
+    const auto name          = pCvar->GetName();
+    const auto pVar          = new SSConVar(pCvar, false);
+    m_ConVars[std::string()] = pVar;
     return pVar;
 }
 
@@ -94,106 +95,79 @@ inline SSConVar::SSConVar(ConVar* pVar, bool bRegister) :
 {
 }
 
-inline ConVar* SSConVar::GetBase()
+#define CVAR_BRIDGE_GET(member, ret)                    \
+    SS_API ret SSConVarGet##member(const SSConVar* ptr) \
+    {                                                   \
+        return ptr->GetBase()->Get##member();           \
+    }
+
+#define CVAR_BRIDGE_SET(member, type)                              \
+    SS_API void SSConVarSet##member(const SSConVar* ptr, type val) \
+    {                                                              \
+        return ptr->GetBase()->SetValue(val);                      \
+    }
+
+CVAR_BRIDGE_GET(Name, const char*);
+CVAR_BRIDGE_GET(Default, const char*);
+
+DECL_CLASS_MEMBER_EXPORT_GET(SSConVar, Description, const char*)
 {
-    return m_pConVar;
-}
-
-#define SSCVAR_INVOKE_GET(NAME, TYPE)  \
-    TYPE SSConVar::Get##NAME()         \
-    {                                  \
-        return m_pConVar->Get##NAME(); \
-    }
-
-#define SSCVAR_INVOKE_SET(NAME, TYPE) \
-    void SSConVar::Set##NAME(TYPE v)  \
-    {                                 \
-        m_pConVar->Set##NAME(v);      \
-    }
-
-#define SSCVAR_INVOKE_SETV(NAME, TYPE) \
-    void SSConVar::Set##NAME(TYPE v)   \
-    {                                  \
-        m_pConVar->SetValue(v);        \
-    }
-
-// Info
-SSCVAR_INVOKE_GET(Name, const char*);
-SSCVAR_INVOKE_GET(Default, const char*);
-
-const char* SSConVar::GetDescription()
-{
-    return m_pConVar->GetHelpText();
+    return ptr->GetBase()->GetHelpText();
 }
 
 // Value
-SSCVAR_INVOKE_GET(String, const char*);
-SSCVAR_INVOKE_GET(Float, float);
-SSCVAR_INVOKE_GET(Int, int);
-SSCVAR_INVOKE_GET(Bool, bool);
-SSCVAR_INVOKE_SETV(String, const char*);
-SSCVAR_INVOKE_SETV(Float, float);
-SSCVAR_INVOKE_SETV(Int, int);
-SSCVAR_INVOKE_SETV(Bool, bool);
+CVAR_BRIDGE_GET(String, const char*);
+CVAR_BRIDGE_GET(Float, float);
+CVAR_BRIDGE_GET(Int, int);
+CVAR_BRIDGE_GET(Bool, bool);
+CVAR_BRIDGE_SET(String, const char*);
+CVAR_BRIDGE_SET(Float, float);
+CVAR_BRIDGE_SET(Int, int);
+CVAR_BRIDGE_SET(Bool, bool);
 
 // Flags
-SSCVAR_INVOKE_GET(Flags, int);
-
-void SSConVar::SetFlags(int v)
+CVAR_BRIDGE_GET(Flags, int);
+SS_API void SSConVarAddFlags(const SSConVar* pVar, int nFlags)
 {
-    m_pConVar->AddFlags(v);
+    pVar->GetBase()->AddFlags(nFlags);
 }
 
 // Bounds
-float SSConVar::GetMin()
+CVAR_BRIDGE_GET(MinValue, float);
+CVAR_BRIDGE_GET(MaxValue, float);
+
+DECL_CLASS_MEMBER_EXPORT_GET(SSConVar, HasMin, bool)
 {
-    return m_pConVar->GetMinValue();
+    return ptr->GetBase()->HasMin();
 }
 
-float SSConVar::GetMax()
+DECL_CLASS_MEMBER_EXPORT_GET(SSConVar, HasMax, bool)
 {
-    return m_pConVar->GetMinValue();
+    return ptr->GetBase()->HasMax();
 }
 
-bool SSConVar::GetHasMin()
+SS_API void SSConVarSetBound(const SSConVar* pVar,
+                             bool            bHasMin,
+                             float           flMin,
+                             bool            bHasMax,
+                             float           flMax)
 {
-    float v;
-    return m_pConVar->GetMin(v);
+    // todo
+    pVar->GetBase()->SetValue(1);
+};
+
+// Function
+SS_API void SSConVarRevert(const SSConVar* pVar)
+{
+    return pVar->GetBase()->Revert();
 }
 
-bool SSConVar::GetHasMax()
+SS_API bool SSConVarReplicateToPlayers(const SSConVar* pVar, const int pPlayers[], int nPlayers)
 {
-    float v;
-    return m_pConVar->GetMax(v);
+    return pVar->ReplicateToPlayers(pPlayers, nPlayers);
 }
 
-void SSConVar::SetMax(float value)
-{
-    // TODO
-}
-
-void SSConVar::SetHasMax(bool has)
-{
-    // TODO
-}
-
-void SSConVar::SetMin(float value)
-{
-    // TODO
-}
-
-void SSConVar::SetHasMin(bool has)
-{
-    // TODO
-}
-
-// User Message
-bool SSConVar::ReplicateToPlayers(const int pPlayers[], int nPlayers)
-{
-    // TODO
-    return false;
-}
-
+// Global
 SS_API SSConVar* CreateConVar(const char* pName,
                               const char* pDefValue,
                               const char* pDescription,
@@ -219,4 +193,14 @@ SS_API bool RegisterConVarHook(const char* pName)
         return false;
     }
     return g_ConVarManager.InstallGlobalChangeHook(pVar);
+}
+
+// Impl
+bool SSConVar::ReplicateToPlayers(const int pPlayers[], int nPlayers) const
+{
+    // TODO
+
+    const auto pName = GetBase()->GetName();
+
+    return false;
 }
